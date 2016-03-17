@@ -18,6 +18,7 @@ namespace MyProject
         {
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            
             app.Run(async context => {
                 await context.Response.WriteAsync(env.WebRootPath);
             });
@@ -25,30 +26,23 @@ namespace MyProject
 
         public static void Main(string[] args)
         {
-            try
+            if (args.Contains("--windows-service"))
             {
-                if (args.Contains("--windows-service"))
-                {
-                    Run(new Program());
-                    return;
-                }
+                Run(new Program());
+                return;
+            }
 
-                var program = new Program();
-                program.OnStart(null);
-                Console.ReadLine();
-                program.OnStop();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            var program = new Program();
+            program.OnStart(null);
+            Console.ReadLine();
+            program.OnStop();
         }
 
         protected override void OnStart(string[] args)
         {
             var configProvider = new MemoryConfigurationProvider();
             configProvider.Add("server.urls", "http://localhost:5000");
-            configProvider.Add("webroot", "./../../../my-root");
+            configProvider.Add("webroot", "root2");
 
             var config = new ConfigurationBuilder()
                 .Add(configProvider)
@@ -61,10 +55,10 @@ namespace MyProject
                 .Build()
                 .Start();
         }
-
+        
         protected override void OnStop()
         {
-            _application?.Dispose();
+                _application?.Dispose();
         }
     }
 }
