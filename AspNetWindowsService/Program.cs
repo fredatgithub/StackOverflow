@@ -20,7 +20,12 @@ namespace MyProject
             app.UseStaticFiles();
             
             app.Run(async context => {
-                await context.Response.WriteAsync(env.WebRootPath);
+
+                // localhost:5000/env
+                if(context.Request.Path.ToString().Contains("env"))
+                {
+                    await context.Response.WriteAsync(env.WebRootPath);
+                }
             });
         }
 
@@ -58,7 +63,7 @@ namespace MyProject
         
         protected override void OnStop()
         {
-                _application?.Dispose();
+            _application?.Dispose();
         }
     }
 }
