@@ -17,3 +17,10 @@ Step 3.
 * Delete hosting.json
 * Restart `dnx run`. 
 * Repeat step 2 and notice the difference.
+
+Step 4. 
+
+Publish and then run.
+
+    dnu publish
+    dnx run -p .\bin\output\approot\src\AspNetWindowsService\
