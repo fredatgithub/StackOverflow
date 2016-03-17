@@ -49,18 +49,15 @@ namespace MyDnxService
                     .Add(configProvider)
                     .Build();
 
-                var builder = new WebHostBuilder(config);
-                builder.UseServer("Microsoft.AspNet.Server.Kestrel");
-                builder.UseServices(services => services.AddMvc());
-                builder.UseStartup(appBuilder =>
-                {
-                    appBuilder.UseDefaultFiles();
-                    appBuilder.UseStaticFiles();
-                    appBuilder.UseMvc();
-                });
-
-                var hostingEngine = builder.Build();
-                _application = hostingEngine.Start();
+                _application = new WebHostBuilder(config)
+                    .UseServer("Microsoft.AspNet.Server.Kestrel")
+                    .UseStartup(appBuilder =>
+                    {
+                        appBuilder.UseDefaultFiles();
+                        appBuilder.UseFileServer();
+                    })
+                    .Build()
+                    .Start();
             }
             catch (Exception ex)
             {
