@@ -1,19 +1,27 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using System.ServiceProcess;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Hosting.Internal;
+using Microsoft.AspNet.Http;
+using System.Linq;
+using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Memory;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceProcess;
 
-namespace MyDnxService
+namespace MyProject
 {
     public class Program : ServiceBase
     {
         private IApplication _application;
+        
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.Run(async context => {
+                await context.Response.WriteAsync(env.WebRootPath);
+            });
+        }
 
         public static void Main(string[] args)
         {
@@ -22,7 +30,6 @@ namespace MyDnxService
                 if (args.Contains("--windows-service"))
                 {
                     Run(new Program());
-                    Debug.WriteLine("Exiting");
                     return;
                 }
 
@@ -33,37 +40,26 @@ namespace MyDnxService
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
                 throw;
             }
         }
 
         protected override void OnStart(string[] args)
         {
-            try
-            {
-                var configProvider = new MemoryConfigurationProvider();
-                configProvider.Add("server.urls", "http://localhost:5000");
+            var configProvider = new MemoryConfigurationProvider();
+            configProvider.Add("server.urls", "http://localhost:5000");
+            configProvider.Add("webroot", "./../../../my-root");
 
-                var config = new ConfigurationBuilder()
-                    .Add(configProvider)
-                    .Build();
+            var config = new ConfigurationBuilder()
+                .Add(configProvider)
+                .AddJsonFile("hosting.json", optional: true)
+                .Build();
 
-                _application = new WebHostBuilder(config)
-                    .UseServer("Microsoft.AspNet.Server.Kestrel")
-                    .UseStartup(appBuilder =>
-                    {
-                        appBuilder.UseDefaultFiles();
-                        appBuilder.UseFileServer();
-                    })
-                    .Build()
-                    .Start();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("error in OnStart: " + ex);
-                throw;
-            }
+            _application = new WebHostBuilder(config)
+                .UseServer("Microsoft.AspNet.Server.Kestrel")
+                .UseStartup<Program>()
+                .Build()
+                .Start();
         }
 
         protected override void OnStop()

@@ -1,4 +1,5 @@
 ﻿{
+        "webroot": "foobar",
     "version": "1.0.0-*",
     "description": "Shell project for hosting ASP.NET in a Windows service",
     "commands": {
@@ -16,6 +17,5 @@
         "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
         "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
         "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
-    },
-    "webroot": "../../../wwwroot"
+    }
 }
