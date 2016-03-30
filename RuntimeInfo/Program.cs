@@ -10,8 +10,10 @@ namespace ConsoleApplication
         {
             app.Run(context =>
             {
-                return context.Response.WriteAsync(
-                    System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
+                var message = string.Format(
+                    "System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription: {0}", System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
+                
+                return context.Response.WriteAsync(message);
             });
         }
         
