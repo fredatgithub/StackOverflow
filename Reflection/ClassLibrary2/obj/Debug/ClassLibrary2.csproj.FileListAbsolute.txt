@@ -1,0 +1,5 @@
+C:\GitHub\StackOverflow\Reflection\ClassLibrary2\bin\Debug\ClassLibrary2.dll
+C:\GitHub\StackOverflow\Reflection\ClassLibrary2\bin\Debug\ClassLibrary2.pdb
+C:\GitHub\StackOverflow\Reflection\ClassLibrary2\obj\Debug\ClassLibrary2.csprojResolveAssemblyReference.cache
+C:\GitHub\StackOverflow\Reflection\ClassLibrary2\obj\Debug\ClassLibrary2.dll
+C:\GitHub\StackOverflow\Reflection\ClassLibrary2\obj\Debug\ClassLibrary2.pdb
