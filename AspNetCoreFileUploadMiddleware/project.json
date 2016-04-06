@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0-*",
+  "exclude": [
+    "wwwroot"
+  ],
+  "publishExclude": [
+    "**.kproj",
+    "**.user",
+    "**.vspscc"
+  ],
+  "tools": {
+      "dotnet-watch": "1.0.0-*"
+  },
+  "dependencies": {
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
+    "Microsoft.NETCore.Platforms": "1.0.1-*"
+  },
+  "frameworks": {
+    "net451": {},
+    "netstandardapp1.5": {
+      "dependencies": {
+        "NETStandard.Library": "1.5.0-*"
+      },
+      "imports": [
+        "dnxcore50"
+      ]
+    }
+  },
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+  "commands": {
+    "web": "Content.Upload.Files"
+  }
+}
