@@ -1,0 +1,28 @@
+{
+    "version": "1.0.0-*",
+    "compilationOptions": {
+        "emitEntryPoint": true
+    },
+    "dependencies": {
+      
+    },
+    "tools": {
+        "dotnet-watch": "1.0.0-*"
+    },
+    "frameworks": {
+        "netstandardapp1.5": {
+            "dependencies": {
+                "NETStandard.Library": "1.0.0-*",
+                "Microsoft.AspNetCore.IISPlatformHandler": "1.0.0-*",
+                "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
+                "Microsoft.AspNetCore.Mvc": "1.0.0-*"
+            },
+            "imports": [
+                "dnxcore50"
+            ]
+        }
+    },
+    "content": [
+        "Views"
+    ]
+}
