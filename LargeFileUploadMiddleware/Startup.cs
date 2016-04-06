@@ -24,16 +24,15 @@ namespace Content.Upload.Multipart
 
                 var boundary = GetBoundary(context.Request.ContentType);
                 var reader = new MultipartReader(boundary, context.Request.Body);
-
                 var section = await reader.ReadNextSectionAsync();
-
-                const int chunkSize = 1024;
-                var buffer = new byte[chunkSize];
-                var bytesRead = 0;
 
                 while (section != null)
                 {
-                    var fileName = Guid.NewGuid().ToString() + ".jpg";
+                    // process each image
+                    const int chunkSize = 1024;
+                    var buffer = new byte[chunkSize];
+                    var bytesRead = 0;
+                    var fileName = GetFileName(section.ContentDisposition);
 
                     using (var stream = new FileStream(fileName, FileMode.Append))
                     {
@@ -87,6 +86,16 @@ namespace Content.Upload.Multipart
                 boundary = boundary.Substring(1, boundary.Length - 2);
             }
             return boundary;
+        }
+
+        private string GetFileName(string contentDisposition)
+        {
+            return contentDisposition
+                .Split(';')
+                .SingleOrDefault(part => part.Contains("filename"))
+                .Split('=')
+                .Last()
+                .Trim('"');
         }
 
         public static void Main(string[] args)
