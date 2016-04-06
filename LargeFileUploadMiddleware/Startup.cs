@@ -29,25 +29,26 @@ namespace Content.Upload.Multipart
 
                 const int chunkSize = 1024;
                 var buffer = new byte[chunkSize];
+                var bytesRead = 0;
 
                 while (section != null)
                 {
-                    using (var stream = new FileStream("my-file.jpg", FileMode.Append))
-                    {
-                        int bytesRead;
+                    var fileName = Guid.NewGuid().ToString() + ".jpg";
 
+                    using (var stream = new FileStream(fileName, FileMode.Append))
+                    {
                         do
                         {
                             bytesRead = await section.Body.ReadAsync(buffer, 0, buffer.Length);
                             stream.Write(buffer, 0, bytesRead);
 
                         } while (bytesRead > 0);
-
-
                     }
 
                     section = await reader.ReadNextSectionAsync();
                 }
+
+                context.Response.WriteAsync("Done.");
             });
 
             app.Run(async context =>
@@ -70,8 +71,8 @@ namespace Content.Upload.Multipart
 
         private static bool IsMultipartContentType(string contentType)
         {
-            return 
-                !string.IsNullOrEmpty(contentType) && 
+            return
+                !string.IsNullOrEmpty(contentType) &&
                 contentType.IndexOf("multipart/", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
