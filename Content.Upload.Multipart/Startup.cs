@@ -24,7 +24,9 @@ namespace Content.Upload.Multipart
                 context.Response.ContentType = "text/html";
                 await context.Response.WriteAsync("<html><body>Multipart received<br>");
 
-                // Read the request body as multipart sections. This does not buffer the content of each section. If you want to buffer the data
+                // Read the request body as multipart sections. 
+                // This does not buffer the content of each section. 
+                // If you want to buffer the data
                 // then that needs to be added either to the request body before you start or to the individual segments afterward.
                 var boundary = GetBoundary(context.Request.ContentType);
                 var reader = new MultipartReader(boundary, context.Request.Body);
@@ -40,27 +42,7 @@ namespace Content.Upload.Multipart
 
                     // Consume the section body here.
 
-                    // Nested?
-                    if (IsMultipartContentType(section.ContentType))
-                    {
-                        await context.Response.WriteAsync("-- Nested Multipart<br>");
-
-                        var subBoundary = GetBoundary(section.ContentType);
-
-                        var subReader = new MultipartReader(subBoundary, section.Body);
-
-                        var subSection = await subReader.ReadNextSectionAsync();
-                        while (subSection != null)
-                        {
-                            await context.Response.WriteAsync("--- Header count: " + subSection.Headers.Count + "<br>");
-                            foreach (var headerPair in subSection.Headers)
-                            {
-                                await context.Response.WriteAsync("---- " + headerPair.Key + ": " + string.Join(", ", headerPair.Value) + "<br>");
-                            }
-
-                            subSection = await subReader.ReadNextSectionAsync();
-                        }
-                    }
+                    // Nested - see original sample.
 
                     // Drains any remaining section body that has not been consumed and reads the headers for the next section.
                     section = await reader.ReadNextSectionAsync();
@@ -69,35 +51,20 @@ namespace Content.Upload.Multipart
                 await context.Response.WriteAsync("</body></html>");
             });
 
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path != new PathString("/SendMultipart"))
-                {
-                    await next();
-                    return;
-                }
-
-                // For the purposes of the sample we're going to issue a multipart request to ourselves and then tunnel the response to the user.
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:" + context.Connection.LocalPort);
-
-                var content = new MultipartContent("stuff");
-                content.Add(new StringContent("Hello World"));
-                content.Add(new FormUrlEncodedContent(new Dictionary<string, string>()));
-                content.Add(new MultipartContent("nested") { new StringContent("Nested Hello World") });
-
-                var response = await client.PostAsync("", content);
-
-                context.Response.StatusCode = (int)response.StatusCode;
-                context.Response.ContentType = response.Content.Headers.ContentType.ToString();
-                await response.Content.CopyToAsync(context.Response.Body);
-            });
-
             app.Run(async context =>
             {
                 context.Response.ContentType = "text/html";
-                await context.Response.WriteAsync("<html><body>Normal request.<br>");
-                await context.Response.WriteAsync("<a href=\"/SendMultipart\">Send Multipart Request</a><br>");
+                await context.Response.WriteAsync("<html><body>");
+
+                await context.Response.WriteAsync(@"
+<FORM action = ""/"" method=""post"" enctype=""multipart/form-data"" >
+<LABEL for=""myfile1"">File 1:</LABEL>
+<INPUT type=""file"" name=""myfile1"" /><BR>
+<LABEL for=""myfile2"">File 2:</LABEL>
+<INPUT type=""file"" name=""myfile2"" /><BR>
+<INPUT type=""submit"" value=""Send"" />
+</FORM>");
+
                 await context.Response.WriteAsync("</body></html>");
             });
         }
