@@ -22,12 +22,19 @@ namespace ConsoleApplication
                 }
                 else
                 {
+                    context.Response.ContentType = "text/html";
+                    await context.Response.WriteAsync("<html><body>");
+
                     await context.Response.WriteAsync(@"
 <form action = ""/FileUpload"" method=""post"" enctype=""multipart/form-data"">
 <label for=""myfile1"">File</label>
-<input type=""file"" name=""myFile"" />
+<input type=""file"" name=""myFile1"" />
+<label for=""myfile2"">File</label>
+<input type=""file"" name=""myFile2"" />
 <input type=""submit"" value=""Send"" />
 </form>");
+
+                    await context.Response.WriteAsync("</body></html>");
                 }
             });
 
