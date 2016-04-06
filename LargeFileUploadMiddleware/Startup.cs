@@ -70,7 +70,9 @@ namespace Content.Upload.Multipart
 
         private static bool IsMultipartContentType(string contentType)
         {
-            return !string.IsNullOrEmpty(contentType) && contentType.IndexOf("multipart/", StringComparison.OrdinalIgnoreCase) >= 0;
+            return 
+                !string.IsNullOrEmpty(contentType) && 
+                contentType.IndexOf("multipart/", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private static string GetBoundary(string contentType)
