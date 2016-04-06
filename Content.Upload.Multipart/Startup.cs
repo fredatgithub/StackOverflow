@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -21,34 +22,32 @@ namespace Content.Upload.Multipart
                     return;
                 }
 
-                context.Response.ContentType = "text/html";
-                await context.Response.WriteAsync("<html><body>Multipart received<br>");
-
-                // Read the request body as multipart sections. 
-                // This does not buffer the content of each section. 
-                // If you want to buffer the data then that needs to be added 
-                // either to the request body before you start or to the individual segments afterward.
                 var boundary = GetBoundary(context.Request.ContentType);
                 var reader = new MultipartReader(boundary, context.Request.Body);
 
                 var section = await reader.ReadNextSectionAsync();
+
+                const int chunkSize = 1024;
+                var buffer = new byte[chunkSize];
+
                 while (section != null)
                 {
-                    await context.Response.WriteAsync("- Header count: " + section.Headers.Count + "<br>");
-                    foreach (var headerPair in section.Headers)
+                    using (var stream = new FileStream("my-file.jpg", FileMode.Append))
                     {
-                        await context.Response.WriteAsync("-- " + headerPair.Key + ": " + string.Join(", ", headerPair.Value) + "<br>");
+                        int bytesRead;
+
+                        do
+                        {
+                            bytesRead = await section.Body.ReadAsync(buffer, 0, buffer.Length);
+                            stream.Write(buffer, 0, bytesRead);
+
+                        } while (bytesRead > 0);
+
+
                     }
 
-                    // Consume the section body here.
-
-                    // See the original sample for how to consume nested content.
-
-                    // Drains any remaining section body that has not been consumed and reads the headers for the next section.
                     section = await reader.ReadNextSectionAsync();
                 }
-
-                await context.Response.WriteAsync("</body></html>");
             });
 
             app.Run(async context =>
@@ -76,8 +75,6 @@ namespace Content.Upload.Multipart
 
         private static string GetBoundary(string contentType)
         {
-            // TODO: Strongly typed headers will take care of this for us
-            // TODO: Limit the length of boundary we accept. The spec says ~70 chars.
             var elements = contentType.Split(' ');
             var element = elements.Where(entry => entry.StartsWith("boundary=")).First();
             var boundary = element.Substring("boundary=".Length);
