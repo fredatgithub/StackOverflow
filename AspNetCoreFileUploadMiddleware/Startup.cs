@@ -37,9 +37,9 @@ namespace Content.Upload.Files
 
                 if (context.Request.HasFormContentType)
                 {
-                    /*
                     var form = await context.Request.Body.Read();
 
+                    /*
                     await context.Response.WriteAsync("Files received: " + form.Files.Count + " entries.<br>");
 
                     foreach (var file in form.Files)
