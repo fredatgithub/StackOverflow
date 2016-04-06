@@ -26,8 +26,8 @@ namespace Content.Upload.Multipart
 
                 // Read the request body as multipart sections. 
                 // This does not buffer the content of each section. 
-                // If you want to buffer the data
-                // then that needs to be added either to the request body before you start or to the individual segments afterward.
+                // If you want to buffer the data then that needs to be added 
+                // either to the request body before you start or to the individual segments afterward.
                 var boundary = GetBoundary(context.Request.ContentType);
                 var reader = new MultipartReader(boundary, context.Request.Body);
 
@@ -42,7 +42,7 @@ namespace Content.Upload.Multipart
 
                     // Consume the section body here.
 
-                    // Nested - see original sample.
+                    // See the original sample for how to consume nested content.
 
                     // Drains any remaining section body that has not been consumed and reads the headers for the next section.
                     section = await reader.ReadNextSectionAsync();

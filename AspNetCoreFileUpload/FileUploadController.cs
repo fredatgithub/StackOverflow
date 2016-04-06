@@ -12,12 +12,11 @@ namespace AspNetCoreFileUpload.Controllers
     public class FileUploadController : Controller
     {
         [HttpPost]
-        public async Task<IActionResult> Index(IFormFile myFile)
+        public async Task<IActionResult> Index()
         {
-            var fileName = GetFileName(myFile);
-            // await SaveAsync(myFile, fileName);
+            var length = Request.Body.Length;
 
-            var result = new { files = fileName };
+            var result = new { length = length };
             return new OkObjectResult(result);
         }
 
