@@ -11,5 +11,9 @@
   },
   "runtimes": {
     "win10-x64": {}
-  }
+  },
+  "content": [
+    "wwwroot",
+    "appdata"
+  ]
 }
