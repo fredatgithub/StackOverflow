@@ -7,13 +7,24 @@
     "Microsoft.AspNetCore.IISPlatformHandler": "1.0.0-*",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-*",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
+    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0-*",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.0.0-*",
+    "Microsoft.EntityFrameworkCore.Commands": "1.0.0-*",
     "Microsoft.NETCore.App": "1.0.0-rc2-*"
   },
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [
         "dnxcore50",
-        "portable-net45+wp80+win8+wpa81+dnxcore50"
+        "portable-net45"
+      ]
+    }
+  },
+  "tools": {
+    "dotnet-ef": {
+      "version": "1.0.0-*",
+      "imports": [
+        "portable-net45"
       ]
     }
   },
@@ -22,6 +33,7 @@
   },
   "content": [
     "wwwroot",
-    "appdata"
+    "Algae.db",
+    "web.config"
   ]
 }
