@@ -28,19 +28,12 @@ namespace ConsoleApplication
             Console.WriteLine($"dataRoot:{dataRoot}");
             Console.WriteLine("---");
 
-            // var host = new WebHostBuilder()
-            //     .UseKestrel()
-            //     .UseContentRoot(Directory.GetCurrentDirectory())
-            //     .UseDefaultHostingConfiguration(args)
-            //     .UseIISIntegration()
-            //     .UseStartup<Startup>()
-            //     .Build();
-
-            // host.Run();
-
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseIISPlatformHandlerUrl()
+            //     .UseIISIntegration()
+            //     .UseContentRoot(Directory.GetCurrentDirectory())
+            //     .UseDefaultHostingConfiguration(args)
                 .UseStartup<Startup>()
                 .Build();
 
