@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Server Sent Event Sample</title>
 </head>
+
 <body>
     <h1>Server Sent Example</h1>
+    <ul id="messages">
+    </ul>
     <script type="text/javascript">
-        console.log('Hello world.');
-    
+        
+        var ul = document.getElementById('messages');
         var source = new EventSource('sse');
+    
+        function write(message)
+        {
+            var li = document.createElement('li');
+            var text = document.createTextNode(message);
+            li.appendChild(text);
+            ul.appendChild(li);
+        }
+    
         source.onmessage = function (event) {
-            console.log("onmessage");
-            console.log(event);
+            write('onmessage');
+            write(event.data);
         };
         
         source.onopen = function(event) {
-            console.log('onopen');
-            console.log(event);
+            write('onopen');
         };
         
         source.onerror = function(event) {
-            console.log('onerror');
-            console.log(event);
+            write('onerror');
         }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            write('Ready');
+        
+        }, false);
     </script>
 </body>
+
 </html>
