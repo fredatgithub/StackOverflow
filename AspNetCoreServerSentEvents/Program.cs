@@ -9,11 +9,18 @@ namespace ConsoleApplication
     {
         public void Configure(IApplicationBuilder app)
         {
-            app.Run(context => {
-               return context.Response.WriteAsync($"Hello world!"); 
-            }); 
+            app.Run(context =>
+            {
+                var path = context.Request.Path.ToString();
+                if (path.Contains("sse"))
+                {
+                    context.Response.Headers.Add("Content-Type", "text/event-stream");
+                }
+
+                return context.Response.WriteAsync($"{path}");
+            });
         }
-        
+
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");

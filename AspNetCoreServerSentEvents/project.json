@@ -15,6 +15,14 @@
       ]
     }
   },
+  "tools": {
+    "dotnet-watch": {
+      "version": "1.0.0-*",
+      "imports": [
+        "portable-net45"
+      ]
+    }
+  },
   "runtimes": {
     "win8-x64": {}
   }
