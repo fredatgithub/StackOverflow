@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Server Sent Event Sample</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-
-  </body>
+</head>
+<body>
+    <h1>Server Sent Example</h1>
+    <script type="text/javascript">
+        console.log('Hello world.');
+    
+        var source = new EventSource('sse');
+        source.onmessage = function (event) {
+            console.log("onmessage");
+            console.log(event);
+        };
+        
+        source.onopen = function(event) {
+            console.log('onopen');
+            console.log(event);
+        };
+        
+        source.onerror = function(event) {
+            console.log('onerror');
+            console.log(event);
+        }
+    </script>
+</body>
 </html>
