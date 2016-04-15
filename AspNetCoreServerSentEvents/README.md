@@ -1,6 +1,6 @@
 # AspNetCoreServerSentEvents
 
-Answers: http://stackoverflow.com/questions/36227565/aspnet-core-server-sent-events-response-flush
+This project answers the [ASPNET Core Server Sent Events / Response flush question on StackOverflow](http://stackoverflow.com/questions/36227565/aspnet-core-server-sent-events-response-flush).
 
 # Usuage
 ```
