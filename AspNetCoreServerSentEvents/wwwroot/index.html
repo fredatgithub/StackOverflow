@@ -9,40 +9,22 @@
 </head>
 
 <body>
-    <h1>Server Sent Example</h1>
-    <ul id="messages">
-    </ul>
     <script type="text/javascript">
-        
-        var ul = document.getElementById('messages');
+    
         var source = new EventSource('sse');
-    
-        function write(message)
-        {
-            var li = document.createElement('li');
-            var text = document.createTextNode(message);
-            li.appendChild(text);
-            ul.appendChild(li);
-        }
-    
+        
         source.onmessage = function (event) {
-            write('onmessage');
-            write(event.data);
+            console.log('onmessage: ' + event.data);
         };
-        
+
         source.onopen = function(event) {
-            write('onopen');
+            console.log('onopen');
         };
-        
+
         source.onerror = function(event) {
-            write('onerror');
+            console.log('onerror');
         }
         
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            write('Ready');
-        
-        }, false);
     </script>
 </body>
 

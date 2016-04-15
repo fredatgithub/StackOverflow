@@ -3,10 +3,11 @@ using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace ServerSentEventSample 
+namespace ServerSentEventSample
 {
     public class Program
     {
@@ -14,7 +15,7 @@ namespace ServerSentEventSample
         {
             services.AddDirectoryBrowser();
         }
-        
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment host)
         {
             app.UseFileServer(new FileServerOptions
@@ -24,17 +25,24 @@ namespace ServerSentEventSample
 
             app.Use(async (context, next) =>
             {
-                var path = context.Request.Path.ToString();
-                if (path.Contains("sse"))
+                if (context.Request.Path.ToString().Contains("sse"))
                 {
-                    context.Response.Headers.Add("Content-Type", "text/event-stream");
-                    await context.Response.WriteAsync("data: First message.\r\n");
-                    await context.Response.WriteAsync("data: Second message.\r\n");
-                    await context.Response.WriteAsync("data: Third message.\r\n\r\n");
-                }
+                    var response = context.Response;
+                    
+                    response.Headers.Add("Content-Type", "text/event-stream");
+                    
+                    await response.WriteAsync($"data: First message...\r\r");
 
-                await Task.Delay(1);
-                return;
+                    var i = 0;
+                    
+                    while (true)
+                    {
+                        await Task.Delay(5 * 1000);
+                        
+                        await response
+                            .WriteAsync($"data: Message{i++} at {DateTime.Now}\r\r");
+                    }
+                }
             });
         }
 
