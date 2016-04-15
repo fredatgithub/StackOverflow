@@ -4,12 +4,12 @@
     "emitEntryPoint": true
   },
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "type": "platform",
-      "version": "1.0.0-rc2-3002392"
-    }
+    "Microsoft.NETCore.App": "1.0.0-rc2-3002392"
   },
   "frameworks": {
     "netcoreapp1.0": {}
+  },
+  "runtimes":{
+    "win8-x64": {}
   }
 }
