@@ -1,17 +1,27 @@
 ﻿using System;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
 
 namespace ConsoleApplication
 {
     public class Program
     {
-        object Task;
-
-        public void Configure(IApplicationBuilder app)
+        public void ConfigureServices(IServiceCollection services)
         {
-            app.UseStaticFiles();
+            services.AddDirectoryBrowser();
+        }
+        public void Configure(IApplicationBuilder app, IHostingEnvironment host)
+        {
+            Console.WriteLine(host.WebRootPath);
+
+            app.UseFileServer(new FileServerOptions
+            {
+                EnableDirectoryBrowsing = true
+            });
+
             app.Use(async (context, next) =>
             {
                 var path = context.Request.Path.ToString();
@@ -20,7 +30,7 @@ namespace ConsoleApplication
                     context.Response.Headers.Add("Content-Type", "text/event-stream");
                 }
 
-                await System.Threading.Tasks.Task.Delay(1);
+                await Task.Delay(1);
                 return;
             });
         }
@@ -32,6 +42,7 @@ namespace ConsoleApplication
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
                 .UseStartup<Program>()
                 .Build();
 
