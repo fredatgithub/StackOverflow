@@ -22,6 +22,8 @@ namespace ServerSentEventSample
                 EnableDirectoryBrowsing = true
             });
 
+            // middleware for server socket events
+            // this works on its own without the need for MVC.
             app.Use(async (context, next) =>
             {
                 if (context.Request.Path.ToString().Contains("sse"))
