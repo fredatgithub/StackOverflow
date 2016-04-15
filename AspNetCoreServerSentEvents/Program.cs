@@ -1,15 +1,18 @@
 ﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 
 namespace ConsoleApplication
 {
     public class Program
     {
+        object Task;
+
         public void Configure(IApplicationBuilder app)
         {
-            app.Run(context =>
+            app.UseStaticFiles();
+            app.Use(async (context, next) =>
             {
                 var path = context.Request.Path.ToString();
                 if (path.Contains("sse"))
@@ -17,7 +20,8 @@ namespace ConsoleApplication
                     context.Response.Headers.Add("Content-Type", "text/event-stream");
                 }
 
-                return context.Response.WriteAsync($"{path}");
+                await System.Threading.Tasks.Task.Delay(1);
+                return;
             });
         }
 
@@ -27,6 +31,7 @@ namespace ConsoleApplication
 
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Program>()
                 .Build();
 
