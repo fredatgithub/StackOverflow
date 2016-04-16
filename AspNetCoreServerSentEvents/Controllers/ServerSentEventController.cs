@@ -24,7 +24,7 @@ namespace ServerSentEventSample
             for(var i = 0; true; ++i)
             {
                 await response
-                    .WriteAsync($"data: Controller {++i} at {DateTime.Now}\r\r");
+                    .WriteAsync($"data: Controller {i} at {DateTime.Now}\r\r");
                     
                 response.Body.Flush();
                 await Task.Delay(5 * 1000);
