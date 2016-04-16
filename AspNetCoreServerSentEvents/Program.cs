@@ -33,19 +33,16 @@ namespace ServerSentEventSample
                 if (context.Request.Path.ToString().Equals("/sse"))
                 {
                     var response = context.Response;
-
                     response.Headers.Add("Content-Type", "text/event-stream");
 
-                    await response.WriteAsync($"data: First message...\r\r");
-
-                    var i = 0;
-
-                    while (true)
+                    for(var i = 0; true; ++i)
                     {
-                        await Task.Delay(5 * 1000);
-
                         await response
-                            .WriteAsync($"data: Middleware #{i++} at {DateTime.Now}\r\r");
+                            .WriteAsync($"data: Middleware {i++} at {DateTime.Now}\r\r");
+                            
+                        response.Body.Flush();
+                                
+                        await Task.Delay(5 * 1000);
                     }
                 }
 

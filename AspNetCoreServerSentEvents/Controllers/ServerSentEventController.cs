@@ -21,13 +21,13 @@ namespace ServerSentEventSample
             response.Headers.Add("Content-Type", "text/event-stream");
             response.StatusCode = 200;
 
-            while (true)
+            for(var i = 0; true; ++i)
             {
-                await response.WriteAsync($"data: Controller at {DateTime.Now}\r\r");
-                
+                await response
+                    .WriteAsync($"data: Controller {++i} at {DateTime.Now}\r\r");
+                    
                 response.Body.Flush();
-                
-                await Task.Delay(30 * 1000);
+                await Task.Delay(5 * 1000);
             }
         }
     }
