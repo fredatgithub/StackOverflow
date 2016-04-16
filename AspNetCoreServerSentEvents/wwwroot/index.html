@@ -13,7 +13,9 @@
     <button id="middleware">Middleware</button>
     <button id="controller">Controller</button>
     <script type="text/javascript">
+    
         var source;
+        
         function listenForServerEvents(url)
         {
             if (source) source.close();
@@ -33,7 +35,7 @@
             };
         }
     
-        document.getElementById("middleware").addEventListener("click", function ()
+        document.getElementByTagName("middleware").addEventListener("click", function ()
         {
             listenForServerEvents("sse");
         });
@@ -42,6 +44,9 @@
         {
             listenForServerEvents("api/sse");
         });
+        
+        listForServerEvents('sse');
+        
     </script>
 </body>
 
