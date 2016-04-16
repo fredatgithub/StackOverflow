@@ -35,7 +35,7 @@
             };
         }
     
-        document.getElementByTagName("middleware").addEventListener("click", function ()
+        document.getElementById("middleware").addEventListener("click", function ()
         {
             listenForServerEvents("sse");
         });
@@ -45,7 +45,7 @@
             listenForServerEvents("api/sse");
         });
         
-        listForServerEvents('sse');
+        listenForServerEvents('sse');
         
     </script>
 </body>
