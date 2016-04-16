@@ -12,7 +12,8 @@
     <p>Open your web browser's console to see the eventing.</p>
     <script type="text/javascript">
     
-        var source = new EventSource('sse');
+        // var source = new EventSource('sse'); // middleware
+        var source = new EventSource('api/sse'); // controller
         
         source.onmessage = function (event) {
             console.log('onmessage: ' + event.data);

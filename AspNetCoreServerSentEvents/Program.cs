@@ -13,7 +13,9 @@ namespace ServerSentEventSample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDirectoryBrowser();
-            
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddMvcCore();
         }
 
@@ -31,25 +33,27 @@ namespace ServerSentEventSample
                 if (context.Request.Path.ToString().Equals("/sse"))
                 {
                     var response = context.Response;
-                    
+
                     response.Headers.Add("Content-Type", "text/event-stream");
-                    
+
                     await response.WriteAsync($"data: First message...\r\r");
 
                     var i = 0;
-                    
+
                     while (true)
                     {
                         await Task.Delay(5 * 1000);
-                        
+
                         await response
-                            .WriteAsync($"data: Message{i++} at {DateTime.Now}\r\r");
+                            .WriteAsync($"data: Middleware #{i++} at {DateTime.Now}\r\r");
                     }
                 }
-                
+
                 await next.Invoke();
             });
-            
+
+            app.UseDeveloperExceptionPage();
+
             app.UseMvc();
         }
 

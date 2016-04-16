@@ -1,19 +1,34 @@
+using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ServerSentEventSample
 {
     [Route("/api/sse")]
     public class ServerSentEventController
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ServerSentEventController(IHttpContextAccessor httpContextAccessor)
         {
-            // in progress. :)
-            var result = new ContentResult();
-            result.Content = "data: Well hello there.\r\r";
-            result.ContentType = "text/event-stream";
-            result.StatusCode = 200;
-            return result;
-        }    
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        [HttpGet]
+        public async Task Get()
+        {
+            var response = _httpContextAccessor.HttpContext.Response;
+            response.Headers.Add("Content-Type", "text/event-stream");
+            response.StatusCode = 200;
+
+            while (true)
+            {
+                await response.WriteAsync($"data: Controller at {DateTime.Now}\r\r");
+                
+                response.Body.Flush();
+                
+                await Task.Delay(30 * 1000);
+            }
+        }
     }
-} 
+}
