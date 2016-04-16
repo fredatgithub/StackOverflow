@@ -13,6 +13,8 @@ namespace ServerSentEventSample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDirectoryBrowser();
+            
+            services.AddMvcCore();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment host)
@@ -26,7 +28,7 @@ namespace ServerSentEventSample
             // this works on its own without the need for MVC.
             app.Use(async (context, next) =>
             {
-                if (context.Request.Path.ToString().Contains("sse"))
+                if (context.Request.Path.ToString().Equals("/sse"))
                 {
                     var response = context.Response;
                     
@@ -44,7 +46,11 @@ namespace ServerSentEventSample
                             .WriteAsync($"data: Message{i++} at {DateTime.Now}\r\r");
                     }
                 }
+                
+                await next.Invoke();
             });
+            
+            app.UseMvc();
         }
 
         public static void Main(string[] args)
