@@ -1,4 +1,5 @@
 # StackOverflow
+
 Contains samples to support StackOverflow answers.
 
 1. **AspNetCoreApiReturnXmlString** [Return “application/xml” instead of “text/plain” ASP.NET Core Web API][0].
@@ -21,3 +22,8 @@ Contains samples to support StackOverflow answers.
 [1]: http://stackoverflow.com/q/36680933/1108891
 [2]: http://stackoverflow.com/q/36227565/1108891
 [4]: http://stackoverflow.com/q/36062431/1108891
+
+Ideally, each answer will have:
+
+* a readme with a usuage section. 
+* a NuGet.config (for .NET Core projects).
