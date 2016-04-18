@@ -2,7 +2,7 @@
 Contains samples to support StackOverflow answers.
 
 * **AspNetCoreApiReturnXmlString** answers [Return “application/xml” instead of “text/plain” ASP.NET Core Web API][0].
-* AspNetCoreCustomControllerNames answers [Discovering Generic Controllers in ASP.NET Core][1].
+* **AspNetCoreCustomControllerNames** answers [Discovering Generic Controllers in ASP.NET Core][1].
 * AspNetCoreServerSentEvents     
 * AspNetCoreSqlite               
 * AspNetWindowsService           
