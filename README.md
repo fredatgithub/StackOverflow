@@ -5,7 +5,7 @@ Contains samples to support StackOverflow answers.
 1. **AspNetCoreCustomControllerNames** answers [Discovering Generic Controllers in ASP.NET Core][1].
 1. **AspNetCoreServerSentEvents** answers [ASPNET Core Server Sent Events / Response flush][2].
 1. **AspNetCoreSqlite** Unknown
-1. AspNetWindowsService** answers [ASP.NET Core as Windows service wwwroot location][4]
+1. **AspNetWindowsService** answers [ASP.NET Core as Windows service wwwroot location][4]
 1. CreatedAtRoute                 
 1. DeleteLogs                     
 1. Dev82                          
