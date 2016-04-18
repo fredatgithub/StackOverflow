@@ -1,1 +1,0 @@
-dotnet publish --output approot
