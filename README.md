@@ -1,7 +1,7 @@
 # StackOverflow
 Contains samples to support StackOverflow answers.
 
-* AspNetCoreApiReturnXmlString answers [Return “application/xml” instead of “text/plain” ASP.NET Core Web API][0].
+* **AspNetCoreApiReturnXmlString** answers [Return “application/xml” instead of “text/plain” ASP.NET Core Web API][0].
 * AspNetCoreCustomControllerNames
 * AspNetCoreServerSentEvents     
 * AspNetCoreSqlite               
