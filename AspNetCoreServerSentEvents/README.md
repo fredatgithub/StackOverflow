@@ -1,11 +1,11 @@
-# AspNetCoreServerSentEvents
+Associated StackOverflow question: [ASPNET Core Server Sent Events / Response flush][0].
 
-This project answers the [ASPNET Core Server Sent Events / Response flush question on StackOverflow](http://stackoverflow.com/questions/36227565/aspnet-core-server-sent-events-response-flush).
-
-# Usuage
+Usuage
 ```
 dnvm use 1.0.0-rc2-20221 -runtime coreclr
 dotnet restore
 dotnet watch
 ```
 Then navigate to `localhost:5000` and open the web console.
+
+[0]: http://stackoverflow.com/q/36227565/1108891
