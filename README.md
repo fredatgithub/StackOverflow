@@ -2,7 +2,7 @@
 Contains samples to support StackOverflow answers.
 
 * **AspNetCoreApiReturnXmlString** answers [Return “application/xml” instead of “text/plain” ASP.NET Core Web API][0].
-* AspNetCoreCustomControllerNames
+* AspNetCoreCustomControllerNames answers [Discovering Generic Controllers in ASP.NET Core][1].
 * AspNetCoreServerSentEvents     
 * AspNetCoreSqlite               
 * AspNetWindowsService           
@@ -17,4 +17,5 @@ Contains samples to support StackOverflow answers.
 * RuntimeInfo                    
 * TagHelpersNotWorking           
 
-[0]: http://stackoverflow.com/questions/36682240/return-application-xml-instead-of-text-plain-asp-net-core-web-api/36682743#36682743
+[0]: http://stackoverflow.com/q/36682240/1108891
+[1]: http://stackoverflow.com/q/36680933/1108891
