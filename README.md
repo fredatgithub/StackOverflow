@@ -1,11 +1,11 @@
 # StackOverflow
 Contains samples to support StackOverflow answers.
 
-1. **AspNetCoreApiReturnXmlString** answers [Return “application/xml” instead of “text/plain” ASP.NET Core Web API][0].
-1. **AspNetCoreCustomControllerNames** answers [Discovering Generic Controllers in ASP.NET Core][1].
-1. **AspNetCoreServerSentEvents** answers [ASPNET Core Server Sent Events / Response flush][2].
+1. **AspNetCoreApiReturnXmlString** [Return “application/xml” instead of “text/plain” ASP.NET Core Web API][0].
+1. **AspNetCoreCustomControllerNames** [Discovering Generic Controllers in ASP.NET Core][1].
+1. **AspNetCoreServerSentEvents** [ASPNET Core Server Sent Events / Response flush][2].
 1. **AspNetCoreSqlite** Unknown
-1. **AspNetWindowsService** answers [ASP.NET Core as Windows service wwwroot location][4]
+1. **AspNetWindowsService** [ASP.NET Core as Windows service wwwroot location][4]
 1. CreatedAtRoute                 
 1. DeleteLogs                     
 1. Dev82                          
