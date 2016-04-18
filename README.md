@@ -3,7 +3,7 @@ Contains samples to support StackOverflow answers.
 
 * **AspNetCoreApiReturnXmlString** answers [Return “application/xml” instead of “text/plain” ASP.NET Core Web API][0].
 * **AspNetCoreCustomControllerNames** answers [Discovering Generic Controllers in ASP.NET Core][1].
-* AspNetCoreServerSentEvents     
+* **AspNetCoreServerSentEvents** answers [ASPNET Core Server Sent Events / Response flush][2].
 * AspNetCoreSqlite               
 * AspNetWindowsService           
 * CreatedAtRoute                 
@@ -19,3 +19,4 @@ Contains samples to support StackOverflow answers.
 
 [0]: http://stackoverflow.com/q/36682240/1108891
 [1]: http://stackoverflow.com/q/36680933/1108891
+[2]: http://stackoverflow.com/q/36227565/1108891
