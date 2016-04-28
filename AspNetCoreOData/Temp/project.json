@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0-*",
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+  "dependencies": {
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-*",
+    "Microsoft.AspNet.OData": "6.0.0-*",
+    "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-*",
+    "Microsoft.NETCore.App": "1.0.0-rc2-*"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "net451",
+        "portable-dnxcore50+net45+win8+wp8+wpa81"
+      ]
+    }
+  },
+  "runtimes": {
+    "win8-x64": {}
+  }
+}
