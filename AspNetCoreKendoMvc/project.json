@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0-*",
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+  "dependencies": {
+    "Microsoft.NETCore.App": "1.0.0-*",
+    "Kendo.Mvc": "*"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8+wp8"
+      ]
+    }
+  },
+  "runtimes": {
+    "win8-x64": {}
+  }
+}
