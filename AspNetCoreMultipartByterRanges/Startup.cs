@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -22,42 +21,54 @@ public class Startup
             var response = context.Response;
             response.ContentType = $"multipart/byteranges; boundary={Boundary}";
 
-            // TODO Softcode the 'Content-length' and 'Content-range' headers.            
-            response.ContentLength = 13486;
+            // TODO Softcode the 'Content-length' header.            
+            response.ContentLength = 13646;
             var contentLength = response.ContentLength.Value;
 
             await response.WriteAsync(Boundary + CrLf);
-            await AddImage(response, "./blue.jpg", 301, 600, contentLength);
-            await AddImage(response, "./red.jpg", 601, 900, contentLength);
-            await AddImage(response, "./green.jpg", 901, contentLength, contentLength);
+
+            var blue = new FileInfo("./blue.jpg");
+            var red = new FileInfo("./red.jpg");
+            var green = new FileInfo("./green.jpg");
+
+            long start = 0;
+            long end = blue.Length;
+            await AddImage(response, blue, start, end, contentLength);
+
+            start = end + 1;
+            end = start + red.Length;
+            await AddImage(response, red, start, end, contentLength);
+
+            start = end + 1;
+            end = start + green.Length;
+            await AddImage(response, green, start, end, contentLength);
+
             response.Body.Flush();
         });
     }
 
-    private async Task AddImage(HttpResponse response, string path, 
+    private async Task AddImage(HttpResponse response, FileInfo fileInfo,
         long start, long end, long total)
     {
-        if (!File.Exists(path))
-        {
-            throw new Exception();
-        }
-
-        var bytes = File.ReadAllBytes(path);
+        var bytes = File.ReadAllBytes(fileInfo.FullName);
         var file = new FileContentResult(bytes, "image/jpg");
 
         await response
             .WriteAsync($"Content-type: {file.ContentType.ToString()}" + CrLf);
-        
+
+        await response
+            .WriteAsync($"Content-disposition: attachment; filename={fileInfo.Name}" + CrLf);
+
         await response
             .WriteAsync($"Content-range: bytes {start}-{end}/{total}" + CrLf);
-        
+
         await response.WriteAsync(CrLf);
         await response.Body.WriteAsync(
-            file.FileContents, 
-            offset: 0, 
+            file.FileContents,
+            offset: 0,
             count: file.FileContents.Length);
         await response.WriteAsync(CrLf);
-        
+
         await response.WriteAsync(Boundary + CrLf);
     }
 }
