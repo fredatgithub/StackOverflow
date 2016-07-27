@@ -22,15 +22,20 @@ public class Startup
             var response = context.Response;
             response.ContentType = $"multipart/byteranges; boundary={Boundary}";
 
+            // TODO Softcode the 'Content-length' and 'Content-range' headers.            
+            response.ContentLength = 13486;
+            var contentLength = response.ContentLength.Value;
+
             await response.WriteAsync(Boundary + CrLf);
-            await AddImage(response, "./blue.jpg");
-            await AddImage(response, "./red.jpg");
-            await AddImage(response, "./green.jpg");
+            await AddImage(response, "./blue.jpg", 301, 600, contentLength);
+            await AddImage(response, "./red.jpg", 601, 900, contentLength);
+            await AddImage(response, "./green.jpg", 901, contentLength, contentLength);
             response.Body.Flush();
         });
     }
 
-    private async Task AddImage(HttpResponse response, string path)
+    private async Task AddImage(HttpResponse response, string path, 
+        long start, long end, long total)
     {
         if (!File.Exists(path))
         {
@@ -40,16 +45,19 @@ public class Startup
         var bytes = File.ReadAllBytes(path);
         var file = new FileContentResult(bytes, "image/jpg");
 
-        await response.WriteAsync("Content-type: " + file.ContentType.ToString() + CrLf);
-
-        // TODO Add Content-range header. This will take some thought. :)
-
+        await response
+            .WriteAsync($"Content-type: {file.ContentType.ToString()}" + CrLf);
+        
+        await response
+            .WriteAsync($"Content-range: bytes {start}-{end}/{total}" + CrLf);
+        
         await response.WriteAsync(CrLf);
         await response.Body.WriteAsync(
             file.FileContents, 
             offset: 0, 
             count: file.FileContents.Length);
         await response.WriteAsync(CrLf);
+        
         await response.WriteAsync(Boundary + CrLf);
     }
 }
