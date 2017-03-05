@@ -1,5 +1,12 @@
 {
   "devDependencies": {
+    "@types/node": "^7.0.5",
+    "nodemon": "^1.11.0",
     "typescript": "^2.1.4"
+  },
+  "dependencies": {
+    "node-dom": "^0.1.0",
+    "request": "^2.79.0",
+    "url": "^0.11.0"
   }
 }

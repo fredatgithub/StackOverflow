@@ -4,14 +4,21 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/index.ts",
-            "cwd": "${workspaceRoot}",
-            "preLaunchTask": "tsc",
+            "name": "nodemon",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/nodemon",
+            "runtimeArgs": [
+                "--debug=5858"
+            ],
+            "program": "${workspaceRoot}/app.js",
             "outFiles": [
                 "${workspaceRoot}/**/*.js"
             ],
-            "sourceMaps": true
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": "tsc",
+            "restart": true,
+            "port": 5858,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
         }
     ]
 }
