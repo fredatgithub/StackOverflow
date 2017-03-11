@@ -11,7 +11,7 @@ namespace Test
 
 		private getComponent(): Vue.Component
         {
-			return Vue.ComponentOptions("test", {
+			return Vue.Component("test", {
 				template: "<div></div>",
 				props: ["test"],
 				methods: {

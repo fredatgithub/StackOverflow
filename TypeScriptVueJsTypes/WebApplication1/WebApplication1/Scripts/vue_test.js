@@ -1,5 +1,4 @@
 "use strict";
-var Vue = require("../typings/vuejs");
 var Test;
 (function (Test) {
     var MyClass = (function () {
@@ -9,14 +8,16 @@ var Test;
             var component = this.getComponent();
         };
         MyClass.prototype.getComponent = function () {
-            return Vue.component("test", {
-                template: "<div></div>",
-                props: ["test"],
-                methods: {
-                    onClick: function () {
-                    }
-                }
-            });
+            return;
+            //return Vue.ComponentOptions("test", {
+            //	template: "<div></div>",
+            //	props: ["test"],
+            //	methods: {
+            //		onClick: () =>
+            //		{
+            //		}
+            //	}
+            //});
         };
         return MyClass;
     }());
