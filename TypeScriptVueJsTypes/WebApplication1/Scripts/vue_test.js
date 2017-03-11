@@ -1,19 +1,26 @@
+"use strict";
 var Test;
 (function (Test) {
-    class MyClass {
-        initialize() {
+    var MyClass = (function () {
+        function MyClass() {
         }
-        getComponent() {
-            return Vue.component("test", {
-                template: "<div></div>",
-                props: ["test"],
-                methods: {
-                    onClick: () => {
-                    }
-                }
-            });
-        }
-    }
+        MyClass.prototype.initialize = function () {
+            var component = this.getComponent();
+        };
+        MyClass.prototype.getComponent = function () {
+            return;
+            //return Vue.ComponentOptions("test", {
+            //	template: "<div></div>",
+            //	props: ["test"],
+            //	methods: {
+            //		onClick: () =>
+            //		{
+            //		}
+            //	}
+            //});
+        };
+        return MyClass;
+    }());
     Test.MyClass = MyClass;
 })(Test || (Test = {}));
 //# sourceMappingURL=vue_test.js.map
