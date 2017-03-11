@@ -59,6 +59,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="blazings.vuejs, Version=2.1.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\blazings.vuejs.2.1.10\lib\net452\blazings.vuejs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -198,6 +202,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\vuejs\vue.common.js" />
+    <Content Include="Scripts\vuejs\vue.js" />
+    <Content Include="Scripts\vuejs\vue.min.js" />
+    <Content Include="Scripts\vuejs\vue.runtime.common.js" />
+    <Content Include="Scripts\vuejs\vue.runtime.js" />
+    <Content Include="Scripts\vuejs\vue.runtime.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -239,16 +249,15 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\typings\vue\typings.json" />
+    <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\typings\vue\index.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\vue\options.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\vue\plugin.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\vue\vnode.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\vue\vue.d.ts" />
     <TypeScriptCompile Include="Scripts\vue_test.ts" />
-    <TypeScriptCompile Include="Scripts\_references.d.ts" />
+    <TypeScriptCompile Include="typings\vuejs\index.d.ts" />
+    <TypeScriptCompile Include="typings\vuejs\options.d.ts" />
+    <TypeScriptCompile Include="typings\vuejs\plugin.d.ts" />
+    <TypeScriptCompile Include="typings\vuejs\vnode.d.ts" />
+    <TypeScriptCompile Include="typings\vuejs\vue.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

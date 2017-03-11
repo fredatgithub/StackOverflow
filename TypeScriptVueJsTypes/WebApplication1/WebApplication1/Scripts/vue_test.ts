@@ -1,4 +1,6 @@
-﻿namespace Test
+﻿import * as Vue from "../typings/vuejs";
+
+namespace Test
 {
 	export class MyClass
 	{
@@ -8,8 +10,8 @@
 		}
 
 		private getComponent(): Vue.Component
-		{
-			return Vue.component("test", {
+        {
+			return Vue.ComponentOptions("test", {
 				template: "<div></div>",
 				props: ["test"],
 				methods: {
