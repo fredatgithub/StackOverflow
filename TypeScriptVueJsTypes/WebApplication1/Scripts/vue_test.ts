@@ -1,25 +1,20 @@
 ﻿import * as Vue from "../typings/vuejs";
 
-namespace Test
-{
-	export class MyClass
-	{
-		public initialize()
-		{
-			var component = this.getComponent();
-		}
+interface MyComponent extends Vue {
+    message: string
+    onClick(): void
+}
 
-		private getComponent(): Vue.Component
-        {
-			return Vue.Component("test", {
-				template: "<div></div>",
-				props: ["test"],
-				methods: {
-					onClick: () =>
-					{
-					}
-				}
-			});
-		}
-	}
+export default {
+    template: '<button @click="onClick">Click!</button>',
+    data: function () {
+        return {
+            message: 'Hello!'
+        }
+    },
+    methods: {
+        onClick: function () {
+            window.alert(this.message)
+        }
+    }
 }
