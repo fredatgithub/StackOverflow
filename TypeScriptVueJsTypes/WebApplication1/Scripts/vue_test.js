@@ -13,4 +13,3 @@ exports.default = {
         }
     }
 };
-//# sourceMappingURL=vue_test.js.map

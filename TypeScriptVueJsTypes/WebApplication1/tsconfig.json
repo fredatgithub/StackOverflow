@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
-    "noEmitOnError": true,
-    "removeComments": false,
-    "sourceMap": true,
     "typeRoots": [
       "./typings/"
     ],
