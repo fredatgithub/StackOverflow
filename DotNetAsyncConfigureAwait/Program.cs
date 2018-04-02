@@ -18,11 +18,11 @@ namespace ConfigureAwait
 
             Console.WriteLine("Original:" + SynchronizationContext.Current);
 
-            await Task.Delay(1000).ConfigureAwait(true);
-            Console.WriteLine("After Result1:" + SynchronizationContext.Current);
+            await Task.Delay(1000).ConfigureAwait(false);
+            Console.WriteLine("After Result1:" + (SynchronizationContext.Current == null));
 
             await Task.Delay(1000);
-            Console.WriteLine("After Result2:" + SynchronizationContext.Current);
+            Console.WriteLine("After Result2:" + (SynchronizationContext.Current == null));
         }
     }
 
