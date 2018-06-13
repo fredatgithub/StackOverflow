@@ -13,6 +13,8 @@ using Microsoft.Extensions.Caching.Distributed;
 // required for Encoding
 using System.Text;
 
+// See StackOverflow question here: 
+// https://stackoverflow.com/questions/50822279/multiple-instances-of-idistributedcache
 namespace AspNetCoreIDistributedCache
 {
     public class Startup
