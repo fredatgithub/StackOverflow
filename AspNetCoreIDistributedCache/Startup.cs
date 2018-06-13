@@ -28,10 +28,16 @@ namespace AspNetCoreIDistributedCache
         }
 
         // Install and start Redis locally:
-        // PS> Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        // 
+        // PS> Set-ExecutionPolicy Bypass -Scope Process -Force; 
+        // PS> iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
         // PS> choco install redis-64
         // PS> redis-server
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDistributedCache cache)
+        // 
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            IDistributedCache cache)
         {
             if (env.IsDevelopment())
             {
