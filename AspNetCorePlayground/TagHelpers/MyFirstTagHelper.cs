@@ -40,16 +40,16 @@ namespace AspNetCorePlayground.TagHelpers
         public void ModifyContents(TagHelperOutput output)
         {
             // outside of the TagName tag
-            output.PreElement.SetHtmlContent("<p>PreElement.SetHtmlContent");
-            output.PostElement.SetHtmlContent("<p>PostElement.SetHtmlContent");
+            output.PreElement.SetHtmlContent("<p>PreElement.SetHtmlContent(string)");
+            output.PostElement.SetHtmlContent("<p>PostElement.SetHtmlContent(string)");
 
             // inside the TagName tag
-            output.PreContent.SetHtmlContent("<li>PreContent.SetHtmlContent");
-            output.PostContent.SetHtmlContent("<li>PostContent.SetHtmlContent");
+            output.PreContent.SetHtmlContent("<li>PreContent.SetHtmlContent(string)");
+            output.PostContent.SetHtmlContent("<li>PostContent.SetHtmlContent(string)");
 
             output.Content
-                .SetHtmlContent("<li>Content.SetHtmlContent") // replaces existing content
-                .AppendHtml("<li>Content.AppendHtml");
+                .SetHtmlContent("<li>Content.SetHtmlContent(string)") // replaces existing content
+                .AppendHtml("<li>Content.AppendHtml(string)");
         }
     }
 }
