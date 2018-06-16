@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace AspNetCorePlayground.TagHelpers
 {
-    public class MyFirst : TagHelper
+    public class MyFirstTagHelper : TagHelper
     {
         public string MyStringProperty { get; set; }
 
         public DateTime MyDateTimeProperty { get; set; }
 
-        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        public override async Task ProcessAsync(
+            TagHelperContext context,
+            TagHelperOutput output)
         {
             ModifyTag(output);
             ModifyAttributes(output);
@@ -20,14 +22,15 @@ namespace AspNetCorePlayground.TagHelpers
             var childContent = await output.GetChildContentAsync();
             var innerHtml = childContent.GetContent();
 
-            output.Content.AppendHtml($"<li>{innerHtml}");
-            output.Content.AppendHtml($"<li><mark>{MyStringProperty}</mark>");
-            output.Content.AppendHtml($"<li><mark>{MyDateTimeProperty.ToString("D")}</mark>");
+            output.Content
+                .AppendHtml($"<li>{innerHtml}")
+                .AppendHtml($"<li>{MyStringProperty}")
+                .AppendHtml($"<li>{MyDateTimeProperty.ToString("D")}");
         }
 
         public void ModifyTag(TagHelperOutput output)
         {
-            // wrap all the PreContent, Content, and PostContent in a paragraph tag.
+            // wrap the PreContent, Content, and PostContent in a list.
             output.TagName = "ul";
             output.TagMode = TagMode.StartTagAndEndTag; // optional
         }
@@ -40,15 +43,19 @@ namespace AspNetCorePlayground.TagHelpers
         public void ModifyContents(TagHelperOutput output)
         {
             // outside of the TagName tag
-            output.PreElement.SetHtmlContent("<p>PreElement.SetHtmlContent(string)");
-            output.PostElement.SetHtmlContent("<p>PostElement.SetHtmlContent(string)");
+            output.PreElement
+                .SetHtmlContent("<p>PreElement.SetHtmlContent(string)");
+            output.PostElement
+                .SetHtmlContent("<p>PostElement.SetHtmlContent(string)");
 
             // inside the TagName tag
-            output.PreContent.SetHtmlContent("<li>PreContent.SetHtmlContent(string)");
-            output.PostContent.SetHtmlContent("<li>PostContent.SetHtmlContent(string)");
-
+            output.PreContent
+                .SetHtmlContent("<li>PreContent.SetHtmlContent(string)");
+            output.PostContent
+                .SetHtmlContent("<li>PostContent.SetHtmlContent(string)");
             output.Content
-                .SetHtmlContent("<li>Content.SetHtmlContent(string)") // replaces existing content
+                // Set... replaces existing content
+                .SetHtmlContent("<li>Content.SetHtmlContent(string)")
                 .AppendHtml("<li>Content.AppendHtml(string)");
         }
     }
