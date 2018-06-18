@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCorePlayground.Models;
+using AspNetCorePlayground.Filters;
 
 namespace AspNetCorePlayground.Controllers
 {
@@ -15,6 +16,7 @@ namespace AspNetCorePlayground.Controllers
             return View();
         }
 
+        [TypeFilter(typeof(MyActionFilter))]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
