@@ -4,10 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using AspNetCorePlayground.Models;
-using AspNetCorePlayground.Filters;
+using AspNetCoreAppUse.Models;
 
-namespace AspNetCorePlayground.Controllers
+namespace AspNetCoreAppUse.Controllers
 {
     public class HomeController : Controller
     {
@@ -16,12 +15,6 @@ namespace AspNetCorePlayground.Controllers
             return View();
         }
 
-        public IActionResult Abc()
-        {
-            return View("Index");
-        }
-
-        [TypeFilter(typeof(MyActionFilter))]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
