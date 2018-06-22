@@ -24,12 +24,11 @@ namespace AspNetCorePlayground.Controllers
             return View();
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
+    [HttpGet("test")]
+    public IActionResult TestMyFirstModelBinder(MyFirstModelBinderTest model)
+    {
+        return Json(model);
+    }
 
         public IActionResult Privacy()
         {
