@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,9 +32,9 @@ namespace AspNetCorePlayground
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMvc();
 
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton<IUrlHelperFactory, CustomUrlHelperFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +59,16 @@ namespace AspNetCorePlayground
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "home",
+                    template: "{action}",
+                    defaults: new { Controller = "Home" });
+
+                routes.MapRoute(
+                    name: "home.html",
+                    template: "{action}.html",
+                    defaults: new { Controller = "Home" });
             });
         }
     }
